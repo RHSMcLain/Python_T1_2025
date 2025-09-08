@@ -17,11 +17,17 @@ print(counter)
 #Write code asking the user for some number, then do some math on it and output the results
 cows = input("How many cows do you have? ")
 print(cows)
-print("That's good, but a pack of rustlers came by and now you have ten fewer")
+
 # cows = cows - 10
 # print("Now there are ", cows)
 # Type casting 
-cows = int(cows) #turns the value of cows into an integer
+try:
+    cows = int(cows) #turns the value of cows into an integer
+except:
+    print("Ummm...you can't have that many cows.  I will give you ten...you're welcome.")
+    cows = 10
+
+print("That's good, but a pack of rustlers came by and now you have ten fewer")
 cows = cows - 10
 print("Now there are " + str(cows)) # str(...) converts it to a string
 # This only works if the input is actually an integer. If the user types in something else (and they will) it will break
