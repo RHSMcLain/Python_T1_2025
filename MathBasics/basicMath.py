@@ -20,10 +20,10 @@ print(cows)
 
 # cows = cows - 10
 # print("Now there are ", cows)
-# Type casting 
-try:
+# Type casting -- now with validation (the try/catch blocks)
+try:  #if there is an error in the code of the block below, it will jump to the 'except' part
     cows = int(cows) #turns the value of cows into an integer
-except:
+except: #This block runs if the try block throws an error
     print("Ummm...you can't have that many cows.  I will give you ten...you're welcome.")
     cows = 10
 
