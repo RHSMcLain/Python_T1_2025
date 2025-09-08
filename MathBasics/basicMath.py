@@ -23,6 +23,7 @@ print(cows)
 # Type casting -- now with validation (the try/catch blocks)
 try:  #if there is an error in the code of the block below, it will jump to the 'except' part
     cows = int(cows) #turns the value of cows into an integer
+    #if you want to allow decimals, use float(cows) instead --or whatever variable you're using.
 except: #This block runs if the try block throws an error
     print("Ummm...you can't have that many cows.  I will give you ten...you're welcome.")
     cows = 10
