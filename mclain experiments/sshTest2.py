@@ -13,7 +13,7 @@ hosts = ['hslab-mm-01',
          'hslab-mm-07', 
          'hslab-mm-08', 
          'hslab-mm-09', 
-         'hslab-mm-10.local', 
+         'hslab-mm-10', 
          'hslab-mm-11', 
          'hslab-mm-12', 
          'hslab-mm-13', 
@@ -36,7 +36,7 @@ password = getpass.getpass("Enter your password: ")
 # The sudo command to be executed.
 # This example will get a listing of the root directory.
 # This should be replaced with the command you need to run.
-sudo_command = 'sudo shutdown -h now'
+sudo_command = 'sudo shutdown -r now'
 
 # --- SSH client setup ---
 def connectAndRun(hostname):
@@ -46,12 +46,12 @@ def connectAndRun(hostname):
         
         print(f"Connecting to {hostname} as {username}...")
         client.connect(hostname, username=username, password=password)
-        print("Connection successful.")
+        # print("Connection successful.")
 
         # --- Execute the sudo command ---
         # We use invoke_shell() to create an interactive shell, which is better
         # for commands that require a password prompt.
-        print(f"Executing command: '{sudo_command}'")
+        # print(f"Executing command: '{sudo_command}'")
         shell = client.invoke_shell()
         
         # Send the sudo command to the shell
@@ -63,28 +63,28 @@ def connectAndRun(hostname):
         time.sleep(1) # Give it a moment to send the prompt
         
         output = shell.recv(1024).decode('utf-8')
-        print("Received output before sending password:", output)
+        # print("Received output before sending password:", output)
 
         # If the password prompt is found, send the password
         if 'password' in output.lower():
-            print("Password prompt detected. Sending password...")
+            # print("Password prompt detected. Sending password...")
             shell.send(password + '\n')
             time.sleep(1) # Wait for the command to finish
             
             # Read the final output from the shell
             final_output = shell.recv(9999).decode('utf-8')
-            print("\n--- Command Output ---")
-            print(final_output)
+            # print("\n--- Command Output ---")
+            # print(final_output)
 
         else:
             # If no password prompt, the command might have run directly or failed
-            print("No password prompt detected. The command might have failed or does not require a password.")
-            print("\n--- Command Output ---")
-            print(output)
+            # print("No password prompt detected. The command might have failed or does not require a password.")
+            # print("\n--- Command Output ---")
+            # print(output)
             time.sleep(1)
             # Read any remaining output
             final_output = shell.recv(9999).decode('utf-8')
-            print(final_output)
+            # print(final_output)
 
     except paramiko.AuthenticationException:
         print("Authentication failed. Please check your username and password.")
@@ -100,18 +100,24 @@ def connectAndRun(hostname):
 
 #---------------------Main Code------
 if __name__ == "__main__":
-    threads = []
-    #create a thread for each hostname
-    
-        #we're running it twice, once adding .local to all of them, and once without
-    for hostname in hosts:
-        hostname = hostname
-        thread = threading.Thread(target=connectAndRun, args=(hostname,))
-        threads.append(thread)
-        thread.start()
+    ext = ""
+    counter = 0
+    for n in range(2):
+        print(counter)
+        counter += 1
+        threads = []
+        #create a thread for each hostname
+        ext = ""
+            #we're running it twice, once adding .local to all of them, and once without
+        for hostname in hosts:
+            hostname = hostname + ext
+            thread = threading.Thread(target=connectAndRun, args=(hostname,))
+            threads.append(thread)
+            thread.start()
 
-    for thread in threads:
-        thread.join()
+        for thread in threads:
+            thread.join()
+        ext = ".local" #on the second run through, it changes 
     
     print("\n[SUCCESS] All threads have finished processing.")
     
