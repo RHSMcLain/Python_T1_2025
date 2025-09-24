@@ -36,7 +36,7 @@ password = getpass.getpass("Enter your password: ")
 # The sudo command to be executed.
 # This example will get a listing of the root directory.
 # This should be replaced with the command you need to run.
-sudo_command = 'sudo shutdown -r now'
+sudo_command = 'sudo shutdown -h now'
 
 # --- SSH client setup ---
 def connectAndRun(hostname):
