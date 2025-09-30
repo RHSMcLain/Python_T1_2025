@@ -33,4 +33,10 @@ cows = cows - 10
 print("Now there are " + str(cows)) # str(...) converts it to a string
 # This only works if the input is actually an integer. If the user types in something else (and they will) it will break
 
+def getInt(q):
+    print(q)
 
+n = getInt("How many cows in the barnyard?")
+n += 3
+print(n)
+    
