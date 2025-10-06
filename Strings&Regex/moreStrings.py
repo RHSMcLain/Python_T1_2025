@@ -19,8 +19,23 @@ print(f"Those cost ${price:06.2f} each")
 print(f"If you want all {qty}, that will be ${qty * price:.2f}")
 #---------------------
 #Quotes inside quotes
+#there are two options for your quotation marks: double quotes ("") and single ('')
+print("He said 'go left'!")
+#or reverse it
+print('He said, "Go Left"!')
+#that gets more complicated if you need both, as in 
+print('He said, "You can\'t go Left"')  #that backslash escapes the ' and says "this is just a string"
+      
 
 #multiline Strings
+#triple quotes let you just type what you want, including line breaks
+print(""" 
+    When I have fears that I may cease to be
+    Before my pen has gleaned my teeming brain
+    Before High-Piled books in charact'ry hold
+    Like rich garners the full-ripened grain
+
+""")
 
 #Strings as arrays
 
