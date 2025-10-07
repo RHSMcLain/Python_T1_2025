@@ -37,20 +37,77 @@ print("""
 
 """)
 
-#Strings as arrays
+#Strings as arrays (aka lists)
+#strings are lists in Python
+phrase = "Buyer Beware"
+print (phrase[4])
+
+print(phrase[1:4])
+print(phrase[0:8]) #from the start to character 8
+#same as this:  
+print(phrase[:8])
+print(phrase[3:])
+#negative numbers go backwards
+print(phrase[-1])
+print(phrase[-5:])
+
+#modifying
+print(phrase.upper())
+print(phrase.lower())
+
+phrase = "     Diamond.   "
+print(f'-{phrase}-')
+phrase = phrase.strip()
+print(f'-{phrase}-')
+  #we can do replacements, too
+phrase = phrase.replace("d", "!")
+print(phrase)
+
+#find the location of a character
+n = phrase.find("a")
+print(n)
+print(phrase[n])
+productID1 = "817-3016"
+productID2 = "09-3185"
+separator = productID2.find("-")
+deptCode = productID2[:separator]
+print(deptCode)
+
+#splits and partitions -- converting strings into data
+email = "amclain@riverdale.k12.or.us"
+#partition takes a string to match, and returns a tuple with 3 parts: the part before the match, the match, and the part after
+parts = email.partition("@")
+print(parts)
+
+#rpartition does the same thing, but searches for the last match, not the first
+parts2 = email.rpartition(".")
+print(parts2)
+
+colors = "red,blue,green,chartreuse,magenta"
+colorsList = colors.split(",")
+print(colorsList)
+
+
 
 
 #Check contents
 
-#slicing strings (and lists for that matter)
+#with strings and lists, you can check to see if it contains something particular
+print("black" in colors)
+myGroceries = "milk,sugar,eggs,cinnamon,powdered sugar,flour".split(",")
+print(myGroceries)
+if ('eggs' in myGroceries):
+    print("You need that")
+if ('motor oil' not in myGroceries):
+    print("You don't need to go to the auto parts store")
 
 
-#modifying
 
 
 
 
-#other methods
+
+
 
 
 
