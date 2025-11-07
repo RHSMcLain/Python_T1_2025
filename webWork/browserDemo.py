@@ -1,5 +1,5 @@
-import webbrowser
-item = input("What are you shopping for?")
+import webbrowser, pyperclip
+item = pyperclip.paste()
 
 webbrowser.open(f"https://cabelas.com/SearchDisplay#q={item}")
 webbrowser.open(f"https://amazon.com/s?k={item}")
