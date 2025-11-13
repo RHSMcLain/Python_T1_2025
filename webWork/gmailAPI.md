@@ -7,7 +7,7 @@
  ## Step 2: Include OAuth Requirements
  ### Includes for Oauth
     import os.path 
-*Helps find the right files for Oauth 
+*Helps find the right files for Oauth
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from google_auth_oauthlib.flow import InstalledAppFlow
