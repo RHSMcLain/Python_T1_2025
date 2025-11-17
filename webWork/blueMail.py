@@ -3,13 +3,15 @@ from getpass import getpass
 from email.message import EmailMessage
 
 port = 465
-server = "mclainonline.com"
+server = "mail.mclainonline.com"
 usename = "student"
 password = getpass("enter your password")
 
-context = ssl._create_unverified_context()
-with smtplib.SMTP_SSL("mail.mclainonline.com", port, context=context) as server:
+context = ssl.create_default_context()
+with smtplib.SMTP_SSL("box2213.bluehost.com", port, context=context) as server:
+    server.ehlo()
     server.login("pythontest@mclainonline.com", password)
+    server.ehlo()
     sender_email = "pythontest@mclainonline.com"
     to_email = "pdxadam@gmail.com"
     message = """
@@ -19,6 +21,9 @@ with smtplib.SMTP_SSL("mail.mclainonline.com", port, context=context) as server:
     msg.set_content("Would you join us in our test survey? You said you would.")
     msg['Subject'] = "Messaging Test Results"
     msg['From'] = sender_email
-    msg['To'] = "pythontest@mclainonline.com"
-    server.send_message(msg)
+    msg['To'] = to_email
+    try:
+        server.send_message(msg)
+    except Exception as e:
+        print(f'Error: {e}')
 
