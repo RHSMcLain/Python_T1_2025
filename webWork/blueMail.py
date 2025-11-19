@@ -7,13 +7,14 @@ server = "mail.mclainonline.com"
 usename = "student"
 password = getpass("enter your password")
 
-context = ssl.create_default_context()
+context = ssl._create_unverified_context()
+
 with smtplib.SMTP_SSL("box2213.bluehost.com", port, context=context) as server:
     server.ehlo()
     server.login("pythontest@mclainonline.com", password)
     server.ehlo()
     sender_email = "pythontest@mclainonline.com"
-    to_email = "pdxadam@gmail.com"
+    to_email = "amclain@riverdale.k12.or.us"
     message = """
         Hi Adam, 
         This week we want to go to the Zoo. Will you join us?"""
