@@ -37,6 +37,7 @@ password = getpass.getpass("Enter your password: ")
 # This example will get a listing of the root directory.
 # This should be replaced with the command you need to run.
 sudo_command = 'sudo shutdown -h now'
+#sudo_command = 'sudo rm -rf "/Applications/Arduino IDE.app"'
 
 # --- SSH client setup ---
 def connectAndRun(hostname):
@@ -53,7 +54,7 @@ def connectAndRun(hostname):
         # for commands that require a password prompt.
         # print(f"Executing command: '{sudo_command}'")
         shell = client.invoke_shell()
-        
+        print(f'Running {sudo_command}')
         # Send the sudo command to the shell
         shell.send(sudo_command + '\n')
         

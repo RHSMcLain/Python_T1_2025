@@ -32,7 +32,7 @@ hosts = ['hslab-mm-02',
          'hslab-mm-22', 
          'hslab-mm-23', 
          'hslab-mm-24']
-
+hosts = ['hslab-mm-08']
 # hostname = 'hslab-mm-09.local'
 username = input("Enter your username: ")
 password = getpass.getpass("Enter your password: ")
@@ -40,9 +40,9 @@ password = getpass.getpass("Enter your password: ")
 # The sudo command to be executed.
 # This example will get a listing of the root directory.
 # This should be replaced with the command you need to run.
-sudo_command = 'sudo mv /Users/Shared/BambuStudio.app /Applications/BambuStudio.app'
-
-
+filename = 'Arduino IDE.app'
+sudo_command = f'sudo mv -r "/Users/Shared/{filename}" "/Applications/{filename}"'
+print(f'sudo command is {sudo_command}')
 # --- SSH client setup ---
 def connectAndRun(hostname):
     try:
@@ -102,12 +102,12 @@ def connectAndRun(hostname):
         if 'client' in locals():
             client.close()
             print("\nConnection closed.")
-def scp_file_with_password(host):
+def scp_file_with_password(host, filename):
     """
     Prompts for a password, connects via SSH, and copies a file using SCP.
     """
-    LOCAL_FILE_PATH = "/Applications/BambuStudio.app"
-    filename = "BambuStudio.app"
+    LOCAL_FILE_PATH = f'/Applications/{filename}'
+    #LOCAL_FILE_PATH = '/Users/amclain/Downloads/arduino-ide_2.3.6_macOS_arm64.dmg'
     REMOTE_DESTINATION_PATH = "/Users/Shared/"
     PORT = 22
     try:
@@ -158,9 +158,9 @@ def scp_file_with_password(host):
             ssh_client.close()
             # print("Connection closed.")
 
-def transferAndCopy(host):
-    scp_file_with_password(host)
-    connectAndRun(host)
+def transferAndCopy(host, filename):
+    scp_file_with_password(host, filename)
+    #connectAndRun(host)
 
 
 #---------------------Main Code------
@@ -176,7 +176,7 @@ if __name__ == "__main__":
             #we're running it twice, once adding .local to all of them, and once without
         for hostname in hosts:
             hostname = hostname + ext
-            thread = threading.Thread(target=transferAndCopy, args=(hostname,))
+            thread = threading.Thread(target=transferAndCopy, args=(hostname,filename,))
             threads.append(thread)
             thread.start()
 
